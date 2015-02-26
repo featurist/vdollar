@@ -1,0 +1,19 @@
+{
+  "name": "vdollar",
+  "version": "1.0.0",
+  "description": "list traversal utility",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha test/*Test.pogo"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "bluebird": "^2.9.12",
+    "chai": "^2.1.0",
+    "pogo": "^0.9.10"
+  },
+  "devDependencies": {
+    "mocha": "^2.1.0"
+  }
+}
