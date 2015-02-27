@@ -21,7 +21,7 @@ var numbers = vdollar.extend({
       return n % 2 == 1;
     });
   }
-)
+});
 
 numbers([1, 2, 3, 4, 5]).skip(1).odds().take(2).get(1); // -> 5
 ```
