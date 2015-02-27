@@ -9,11 +9,11 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+  },
+  "devDependencies": {
+    "mocha": "^2.1.0",
     "bluebird": "^2.9.12",
     "chai": "^2.1.0",
     "pogo": "^0.9.10"
-  },
-  "devDependencies": {
-    "mocha": "^2.1.0"
   }
 }
