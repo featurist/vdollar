@@ -18,3 +18,8 @@ expressions.forEach @(expression)
     it "returns #(expression)"
       set = eval(expression)
       expect(set.toString()).to.equal(expression)
+
+describe '.filter(fn).toString()'
+  it 'returns .filter(<fn>)'
+    set = V$ [1,2].filter(@{})
+    expect(set.toString()).to.equal "V$([1, 2]).filter(<fn>)"
