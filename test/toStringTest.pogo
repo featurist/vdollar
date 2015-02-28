@@ -22,5 +22,5 @@ expressions.forEach @(expression)
 
 describe '.filter(fn).toString()'
   it 'returns .filter(<fn>)'
-    set = V$ [1,2].filter(@{})
+    set = V$ [1,2].filter(@{ false })
     expect(set.toString()).to.equal "V$([1, 2]).filter(<fn>)"
