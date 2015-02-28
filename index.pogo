@@ -11,6 +11,14 @@ V.prototype.filter (predicate) =
 V.prototype.first () =
   self.slice (0, 1, ".first()")
 
+V.prototype.get () =
+  iter = self.createIterator()
+  result = []
+  while (iter.hasNext())
+    result.push(iter.next())
+
+  result
+
 V.prototype.last () =
   self.mutate (createLastIterator(self))
 
@@ -52,7 +60,7 @@ createArrayIterator (array) =
     }
 
 createSliceIterator (prev, start, count, name) =
-  sliceIterator () =
+  @ ()
     iter = prev.createIterator()
     index = 0
     {
@@ -83,7 +91,7 @@ createSliceIterator (prev, start, count, name) =
     }
 
 createLastIterator (prev) =
-  lastIterator () =
+  @ ()
     iter = prev.createIterator()
     index = 0
     {
@@ -104,7 +112,7 @@ createLastIterator (prev) =
     }
 
 createFilterIterator (prev, filter, name) =
-  filterIterator () =
+  @ ()
     iter = prev.createIterator()
 
     next = nil

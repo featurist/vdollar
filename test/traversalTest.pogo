@@ -96,6 +96,12 @@ describe 'skip(1)'
     (v [1, 2, 3].skip(1)) yields [2, 3]
     (v [1, 2].skip(1)) yields [2]
 
+describe 'get()'
+
+  it 'yields the whole list'
+    array = v [1, 2, 3].get()
+    expect (array).to.eql([1, 2, 3])
+
 
 (v) yields (expected) =
   iter = v.createIterator ()
