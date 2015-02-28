@@ -4,7 +4,7 @@
   "description": "list traversal utility",
   "main": "index.js",
   "scripts": {
-    "test": "mocha test/*Test.pogo",
+    "test": "npm run prepublish && mocha test/*Test.pogo",
     "prepublish": "pogo -c index.pogo && browserify browser.js > vdollar.js && uglifyjs vdollar.js > vdollar.min.js -m -c warnings=false"
   },
   "dependencies": {},
