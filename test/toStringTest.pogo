@@ -8,6 +8,7 @@ expressions = [
   'V$([]).eq(0)'
   'V$([]).first()'
   'V$([]).last()'
+  'V$([]).last(2)'
   'V$([]).skip(66)'
   'V$([]).slice(1, 2)'
   'V$([]).take(1)'

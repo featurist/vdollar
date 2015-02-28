@@ -78,6 +78,12 @@ describe 'last()'
     (v [1, 2, 3].last()) yields [3]
     (v [].last()) yields []
 
+describe 'last(2)'
+
+  it 'yields the last 2 elements'
+    (v [1, 2, 3].last(2)) yields [2, 3]
+    (v [].last()) yields []
+
 describe 'slice(0, 2)'
 
   it 'yields the first two elements'

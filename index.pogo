@@ -22,8 +22,8 @@ V.prototype.get (n) =
 
     result
 
-V.prototype.last () =
-  self.mutate (createLastIterator(self))
+V.prototype.last (n) =
+  self.mutate (createLastIterator(self, n))
 
 V.prototype.mutate (createIterator) =
   @new (V (createIterator))
@@ -93,25 +93,21 @@ createSliceIterator (prev, start, count, name) =
         "#(prev.toString())" + name
     }
 
-createLastIterator (prev) =
+createLastIterator (prev, n) =
   @ ()
-    iter = prev.createIterator()
-    index = 0
+    array = prev.get()
+    last = array.slice(array.length - (n || 1))
+    iter = (createArrayIterator (last))()
     {
       op = 'last'
 
       next () =
-        last = nil
-        while (iter.hasNext ())
-          last := iter.next ()
-          index := index + 1
-
-        last
+        iter.next ()
 
       hasNext () =
         iter.hasNext ()
 
-      toString () = "#(iter.toString()).last()"
+      toString () = "#(prev.createIterator().toString()).last(#(n || ''))"
     }
 
 createFilterIterator (prev, filter, name) =
