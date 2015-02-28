@@ -11,13 +11,16 @@ V.prototype.filter (predicate) =
 V.prototype.first () =
   self.slice (0, 1, ".first()")
 
-V.prototype.get () =
-  iter = self.createIterator()
-  result = []
-  while (iter.hasNext())
-    result.push(iter.next())
+V.prototype.get (n) =
+  if (n :: Number)
+    self.eq(n).createIterator().next()
+  else
+    iter = self.createIterator()
+    result = []
+    while (iter.hasNext())
+      result.push(iter.next())
 
-  result
+    result
 
 V.prototype.last () =
   self.mutate (createLastIterator(self))

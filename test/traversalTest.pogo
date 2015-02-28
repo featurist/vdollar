@@ -53,6 +53,20 @@ describe 'first()'
     (v [1].first()) yields [1]
     (v [].first()) yields []
 
+describe 'get()'
+
+  it 'yields the whole list'
+    array = v [1, 2, 3].get()
+    expect (array).to.eql([1, 2, 3])
+
+describe 'get(1)'
+
+  it 'yields the whole list'
+    array = v [1, 2, 3].get(1)
+    expect (array).to.eql(2)
+
+
+
 describe 'last()'
 
   it 'yields the last element'
@@ -95,12 +109,6 @@ describe 'skip(1)'
   it 'yields the last two elements'
     (v [1, 2, 3].skip(1)) yields [2, 3]
     (v [1, 2].skip(1)) yields [2]
-
-describe 'get()'
-
-  it 'yields the whole list'
-    array = v [1, 2, 3].get()
-    expect (array).to.eql([1, 2, 3])
 
 
 (v) yields (expected) =
