@@ -103,17 +103,19 @@ describe 'slice(-1, > max)'
     (v [1, 2, 3].slice(-1, 10)) yields [1, 2, 3]
     (v [].slice(-1, 10)) yields []
 
+describe 'skip(1)'
+
+  it 'yields the last two elements'
+    (v [1, 2, 3].skip(1)) yields [2, 3]
+    (v [1, 2].skip(1)) yields [2]
+
+
 describe 'take(2)'
 
   it 'yields two elements'
     (v [1, 2, 3].take(2)) yields [1, 2]
     (v [1].take(2)) yields [1]
 
-describe 'skip(1)'
-
-  it 'yields the last two elements'
-    (v [1, 2, 3].skip(1)) yields [2, 3]
-    (v [1, 2].skip(1)) yields [2]
 
 
 (v) yields (expected) =
