@@ -4,16 +4,35 @@
   "description": "list traversal utility",
   "main": "index.js",
   "scripts": {
-    "test": "mocha test/*Test.pogo"
+    "test": "mocha test/*Test.pogo",
+    "prepublish": "pogo -c index.pogo && browserify browser.js > vdollar.js && uglifyjs vdollar.js > vdollar.min.js -m -c warnings=false"
   },
-  "author": "",
-  "license": "ISC",
-  "dependencies": {
-  },
+  "dependencies": {},
   "devDependencies": {
-    "mocha": "^2.1.0",
     "bluebird": "^2.9.12",
+    "browserify": "^9.0.3",
     "chai": "^2.1.0",
-    "pogo": "^0.9.10"
-  }
+    "mocha": "^2.1.0",
+    "pogo": "^0.9.10",
+    "uglify": "^0.1.1",
+    "uglify-js": "^2.4.16"
+  },
+  "keywords": [
+    "list",
+    "iterator"
+  ],
+  "author": "Josh Chisholm <joshuachisholm@gmail.com>",
+  "license": "MIT",
+  "files": [
+    "index.js",
+    "vdollar.min.js"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/featurist/vdollar.git"
+  },
+  "bugs": {
+    "url": "https://github.com/featurist/vdollar/issues"
+  },
+  "homepage": "https://github.com/featurist/vdollar"
 }
