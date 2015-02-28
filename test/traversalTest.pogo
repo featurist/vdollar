@@ -1,12 +1,19 @@
 expect = require 'chai'.expect
 v = require '../'
 
-describe 'createIterator()'
+describe 'vdollar(array)'
 
-  it 'yields elements from an array'
+  it 'yields elements from the array'
     (v [1, 2, 3]) yields [1, 2, 3]
     (v [1]) yields [1]
     (v []) yields []
+
+describe 'vdollar(fn<array>)'
+
+  it 'yields elements from the array'
+    (v @{ [1, 2, 3] }) yields [1, 2, 3]
+    (v @{ [1] }) yields [1]
+    (v @{ [] }) yields []
 
 describe 'eq(0)'
 
