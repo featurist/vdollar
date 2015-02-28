@@ -65,8 +65,6 @@ describe 'get(1)'
     array = v [1, 2, 3].get(1)
     expect (array).to.eql(2)
 
-
-
 describe 'last()'
 
   it 'yields the last element'
