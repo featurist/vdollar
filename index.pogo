@@ -3,13 +3,13 @@ V(createIterator) =
   this
 
 V.prototype.eq (index) =
-  self.slice (index, 1, ".eq(#(index))")
+  self.slice (index, 1, @(p) @{ "#(p).eq(#(index))" })
 
-V.prototype.filter (predicate) =
-  self.mutate (createFilterIterator(self, predicate))
+V.prototype.filter (predicate, toString) =
+  self.mutate (createFilterIterator(self, predicate, toString || @(p) @{ "#(p).filter(<fn>)" }))
 
 V.prototype.first () =
-  self.slice (0, 1, ".first()")
+  self.slice (0, 1, @(p) @{ "#(p).first()" })
 
 V.prototype.get (n) =
   if (n :: Number)
@@ -29,13 +29,13 @@ V.prototype.mutate (createIterator) =
   @new (V (createIterator))
 
 V.prototype.skip (count) =
-  self.slice (count, undefined, ".skip(#(count))")
+  self.slice (count, undefined, @(p) @{ "#(p).skip(#(count))" })
 
-V.prototype.slice (start, count, name) =
-  self.mutate (createSliceIterator(self, start, count, name || ".slice(#(start), #(count))"))
+V.prototype.slice (start, count, toString) =
+  self.mutate (createSliceIterator(self, start, count, toString || @(p) @{ "#(p).slice(#(start), #(count))" }))
 
 V.prototype.take (count) =
-  self.slice (0, count, ".take(#(count))")
+  self.slice (0, count, @(p) @{ "#(p).take(#(count))" })
 
 V.prototype.toString () =
   self.createIterator().toString()
@@ -62,7 +62,7 @@ createArrayIterator (array) =
         "V$([#(args.join(', '))])"
     }
 
-createSliceIterator (prev, start, count, name) =
+createSliceIterator (prev, start, count, toString) =
   @ ()
     iter = prev.createIterator()
     index = 0
@@ -90,7 +90,7 @@ createSliceIterator (prev, start, count, name) =
         )
 
       toString () =
-        "#(prev.toString())" + name
+        toString(prev.toString())
     }
 
 createLastIterator (prev, n) =
@@ -110,7 +110,7 @@ createLastIterator (prev, n) =
       toString () = "#(prev.createIterator().toString()).last(#(n || ''))"
     }
 
-createFilterIterator (prev, filter, name) =
+createFilterIterator (prev, predicate, toString) =
   @ ()
     iter = prev.createIterator()
 
@@ -121,7 +121,7 @@ createFilterIterator (prev, filter, name) =
         next := nil
         while (iter.hasNext())
           c = iter.next()
-          if (filter(c))
+          if (predicate(c))
             next := c
             return
 
@@ -139,7 +139,7 @@ createFilterIterator (prev, filter, name) =
         next != nil
 
       toString () =
-        (name || iter.toString()) + ".filter(<fn>)"
+        toString(iter.toString())
     }
 
 createDollar (V) =

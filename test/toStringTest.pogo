@@ -24,3 +24,8 @@ describe '.filter(fn).toString()'
   it 'returns .filter(<fn>)'
     set = V$ [1,2].filter(@{ false })
     expect(set.toString()).to.equal "V$([1, 2]).filter(<fn>)"
+
+describe '.filter(fn, name).toString()'
+  it 'returns .name'
+    set = V$ [1,2].filter(@{ false }, @(p) @{ "#(p).blah!" })
+    expect(set.toString()).to.equal "V$([1, 2]).blah!"

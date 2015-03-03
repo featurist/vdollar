@@ -7,15 +7,21 @@
     };
     V.prototype.eq = function(index) {
         var self = this;
-        return self.slice(index, 1, ".eq(" + index + ")");
+        return self.slice(index, 1, function(p) {
+            return p + ".eq(" + index + ")";
+        });
     };
-    V.prototype.filter = function(predicate) {
+    V.prototype.filter = function(predicate, toString) {
         var self = this;
-        return self.mutate(createFilterIterator(self, predicate));
+        return self.mutate(createFilterIterator(self, predicate, toString || function(p) {
+            return p + ".filter(<fn>)";
+        }));
     };
     V.prototype.first = function() {
         var self = this;
-        return self.slice(0, 1, ".first()");
+        return self.slice(0, 1, function(p) {
+            return p + ".first()";
+        });
     };
     V.prototype.get = function(n) {
         var self = this;
@@ -41,15 +47,21 @@
     };
     V.prototype.skip = function(count) {
         var self = this;
-        return self.slice(count, undefined, ".skip(" + count + ")");
+        return self.slice(count, undefined, function(p) {
+            return p + ".skip(" + count + ")";
+        });
     };
-    V.prototype.slice = function(start, count, name) {
+    V.prototype.slice = function(start, count, toString) {
         var self = this;
-        return self.mutate(createSliceIterator(self, start, count, name || ".slice(" + start + ", " + count + ")"));
+        return self.mutate(createSliceIterator(self, start, count, toString || function(p) {
+            return p + ".slice(" + start + ", " + count + ")";
+        }));
     };
     V.prototype.take = function(count) {
         var self = this;
-        return self.slice(0, count, ".take(" + count + ")");
+        return self.slice(0, count, function(p) {
+            return p + ".take(" + count + ")";
+        });
     };
     V.prototype.toString = function() {
         var self = this;
@@ -87,7 +99,7 @@
             };
         };
     };
-    createSliceIterator = function(prev, start, count, name) {
+    createSliceIterator = function(prev, start, count, toString) {
         return function() {
             var iter, index;
             iter = prev.createIterator();
@@ -121,7 +133,7 @@
                 },
                 toString: function() {
                     var self = this;
-                    return prev.toString() + name;
+                    return toString(prev.toString());
                 }
             };
         };
@@ -149,7 +161,7 @@
             };
         };
     };
-    createFilterIterator = function(prev, filter, name) {
+    createFilterIterator = function(prev, predicate, toString) {
         return function() {
             var iter, next, step;
             iter = prev.createIterator();
@@ -160,7 +172,7 @@
                     next = void 0;
                     while (iter.hasNext()) {
                         c = iter.next();
-                        if (filter(c)) {
+                        if (predicate(c)) {
                             next = c;
                             return;
                         }
@@ -185,7 +197,7 @@
                 },
                 toString: function() {
                     var self = this;
-                    return (name || iter.toString()) + ".filter(<fn>)";
+                    return toString(iter.toString());
                 }
             };
         };
