@@ -69,6 +69,8 @@ createSliceIterator (prev, start, count, toString) =
     {
       op = 'slice'
 
+      parent = iter
+
       next () =
         if (self.hasNext())
           n = iter.next()
@@ -101,6 +103,8 @@ createLastIterator (prev, n) =
     {
       op = 'last'
 
+      parent = prev.createIterator()
+
       next () =
         iter.next ()
 
@@ -127,6 +131,8 @@ createFilterIterator (prev, predicate, toString) =
 
     {
       op = 'filter'
+
+      parent = iter
 
       next () =
         step ()

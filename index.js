@@ -106,6 +106,7 @@
             index = 0;
             return {
                 op: "slice",
+                parent: iter,
                 next: function() {
                     var self = this;
                     var n;
@@ -146,6 +147,7 @@
             iter = createArrayIterator(last)();
             return {
                 op: "last",
+                parent: prev.createIterator(),
                 next: function() {
                     var self = this;
                     return iter.next();
@@ -182,6 +184,7 @@
             };
             return {
                 op: "filter",
+                parent: iter,
                 next: function() {
                     var self = this;
                     var c;
