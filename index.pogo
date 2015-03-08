@@ -32,7 +32,12 @@ V.prototype.skip (count) =
   self.slice (count, undefined, @(p) @{ "#(p).skip(#(count))" })
 
 V.prototype.slice (start, count, toString) =
-  self.mutate (createSliceIterator(self, start, count, toString || @(p) @{ "#(p).slice(#(start), #(count))" }))
+  self.mutate (createSliceIterator(self, start, count, toString || @(p) @{
+    if (count > 0)
+      "#(p).slice(#(start), #(count))"
+    else
+      "#(p).slice(#(start))"
+  }))
 
 V.prototype.take (count) =
   self.slice (0, count, @(p) @{ "#(p).take(#(count))" })

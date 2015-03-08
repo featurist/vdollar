@@ -9,9 +9,12 @@ expressions = [
   'V$([]).first()'
   'V$([]).last()'
   'V$([]).last(2)'
+  'V$([1, 2, 3]).last(2)'
   'V$([]).skip(66)'
   'V$([]).slice(1, 2)'
   'V$([]).take(1)'
+  'V$([1]).slice(1)'
+  'V$([1]).slice(1).slice(2, 3).skip(7)'
 ]
 
 expressions.forEach @(expression)

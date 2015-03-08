@@ -54,7 +54,11 @@
     V.prototype.slice = function(start, count, toString) {
         var self = this;
         return self.mutate(createSliceIterator(self, start, count, toString || function(p) {
-            return p + ".slice(" + start + ", " + count + ")";
+            if (count > 0) {
+                return p + ".slice(" + start + ", " + count + ")";
+            } else {
+                return p + ".slice(" + start + ")";
+            }
         }));
     };
     V.prototype.take = function(count) {

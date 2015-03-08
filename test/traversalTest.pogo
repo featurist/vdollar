@@ -82,7 +82,7 @@ describe 'last(2)'
 
   it 'yields the last two elements'
     (v [1, 2, 3].last(2)) yields [2, 3]
-    (v [].last()) yields []
+    (v [].last(2)) yields []
 
 describe 'slice(1)'
 
@@ -97,7 +97,7 @@ describe 'slice(0, 2)'
     (v [1, 2].slice(0, 2)) yields [1, 2]
     (v [1].slice(0, 2)) yields [1]
 
-describe 'slice(0, 2).slice(0,  2)'
+describe 'slice(0, 2).slice(0, 2)'
 
   it 'yields the first two elements'
     (v [1, 2, 3].slice(0, 2).slice(0, 2)) yields [1, 2]
