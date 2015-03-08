@@ -46,6 +46,9 @@ V.prototype.toString () =
   self.createIterator().toString()
 
 createArrayIterator (array) =
+  if (@not (array :: Array))
+    throw (new (Error "Expected to iterate an array, got a #(typeof(array))"))
+
   @ ()
     index = 0
     {

@@ -72,6 +72,9 @@
         return self.createIterator().toString();
     };
     createArrayIterator = function(array) {
+        if (!(array instanceof Array)) {
+            throw new Error("Expected to iterate an array, got a " + typeof array);
+        }
         return function() {
             var index;
             index = 0;
