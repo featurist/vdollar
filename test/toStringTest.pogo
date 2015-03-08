@@ -32,3 +32,15 @@ describe '.filter(fn, name).toString()'
   it 'returns .name'
     set = V$ [1,2].filter(@{ false }, @(p) @{ "#(p).blah!" })
     expect(set.toString()).to.equal "V$([1, 2]).blah!"
+
+describe '.last().toString()'
+  it 'does not iterate'
+    throws () = throw (new (Error ".last().toString() iterated!"))
+    set = V$ ([1, 2]).filter(throws).last()
+    expect(set.toString()).to.equal "V$([1, 2]).filter(<fn>).last()"
+
+describe '.slice(0, 1).toString()'
+  it 'does not iterate'
+    throws () = throw (new (Error ".slice(0, 1).toString() iterated!"))
+    set = V$ ([1, 2]).filter(throws).slice(0, 1)
+    expect(set.toString()).to.equal "V$([1, 2]).filter(<fn>).slice(0, 1)"

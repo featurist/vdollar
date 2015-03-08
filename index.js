@@ -145,24 +145,32 @@
     };
     createLastIterator = function(prev, n) {
         return function() {
-            var array, last, iter;
-            array = prev.get();
-            last = array.slice(array.length - (n || 1));
-            iter = createArrayIterator(last)();
+            var iter, ensure;
+            iter = void 0;
+            ensure = function() {
+                var array, last;
+                if (!iter) {
+                    array = prev.get();
+                    last = array.slice(array.length - (n || 1));
+                    return iter = createArrayIterator(last)();
+                }
+            };
             return {
                 op: "last",
                 parent: prev.createIterator(),
                 next: function() {
                     var self = this;
+                    ensure();
                     return iter.next();
                 },
                 hasNext: function() {
                     var self = this;
+                    ensure();
                     return iter.hasNext();
                 },
                 toString: function() {
                     var self = this;
-                    return prev.createIterator().toString() + ".last(" + (n || "") + ")";
+                    return this.parent.toString() + ".last(" + (n || "") + ")";
                 }
             };
         };

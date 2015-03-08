@@ -102,21 +102,27 @@ createSliceIterator (prev, start, count, toString) =
 
 createLastIterator (prev, n) =
   @ ()
-    array = prev.get()
-    last = array.slice(array.length - (n || 1))
-    iter = (createArrayIterator (last))()
+    iter = nil
+    ensure () =
+      if (@not iter)
+        array = prev.get()
+        last = array.slice(array.length - (n || 1))
+        iter := (createArrayIterator (last))()
+
     {
       op = 'last'
 
       parent = prev.createIterator()
 
       next () =
+        ensure ()
         iter.next ()
 
       hasNext () =
+        ensure ()
         iter.hasNext ()
 
-      toString () = "#(prev.createIterator().toString()).last(#(n || ''))"
+      toString () = "#(this.parent.toString()).last(#(n || ''))"
     }
 
 createFilterIterator (prev, predicate, toString) =
