@@ -148,6 +148,6 @@ describe 'take(2)'
     "Expected .hasNext() to return false at index #(expected.length)"
   )
   expect(iter.next()).to.equal(
-    nil
-    "Expected .next() to return nil at index #(expected.length)"
+    undefined
+    "Expected .next() to return undefined at index #(expected.length)"
   )
