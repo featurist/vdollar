@@ -9,13 +9,11 @@
   },
   "dependencies": {},
   "devDependencies": {
-    "bluebird": "^2.9.12",
-    "browserify": "^9.0.3",
-    "chai": "^2.1.0",
-    "mocha": "^2.1.0",
-    "pogo": "^0.9.10",
-    "uglify": "^0.1.1",
-    "uglify-js": "^2.4.16"
+    "browserify": "13.0.0",
+    "chai": "3.4.1",
+    "mocha": "2.3.4",
+    "pogo": "0.10.0",
+    "uglifyjs": "2.4.10"
   },
   "keywords": [
     "list",
